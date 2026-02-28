@@ -1,0 +1,169 @@
+name,target,bodyPart,equipment,exercise_type,mechanics,difficulty_level
+lever seated hip abduction,abductors,upper legs,leverage machine,Isolation,Other,1
+side hip abduction,abductors,upper legs,body weight,Isolation,Other,1
+straight leg outer hip abductor,abductors,upper legs,body weight,Isolation,Other,1
+side bridge hip abduction,abductors,upper legs,body weight,Isolation,Other,1
+resistance band seated hip abduction,abductors,upper legs,resistance band,Isolation,Other,1
+3/4 sit-up,abs,waist,body weight,Isolation,Other,1
+45° side bend,abs,waist,body weight,Isolation,Other,1
+air bike,abs,waist,body weight,Cardio,Other,1
+alternate heel touchers,abs,waist,body weight,Isolation,Other,1
+assisted hanging knee raise with throw down,abs,waist,assisted,Compound,Push,1
+assisted hanging knee raise,abs,waist,assisted,Isolation,Push,1
+assisted lying leg raise with lateral throw down,abs,waist,assisted,Compound,Push,1
+assisted lying leg raise with throw down,abs,waist,assisted,Compound,Push,1
+assisted motion russian twist,abs,waist,medicine ball,Isolation,Other,1
+barbell press sit-up,abs,waist,barbell,Compound,Push,3
+cable hip adduction,adductors,upper legs,cable,Isolation,Other,1
+lever seated hip adduction,adductors,upper legs,leverage machine,Isolation,Other,1
+butterfly yoga pose,adductors,upper legs,body weight,Isolation,Other,1
+assisted side lying adductor stretch,adductors,upper legs,assisted,Isolation,Other,1
+side plank hip adduction,adductors,upper legs,body weight,Isolation,Other,1
+side lying hip adduction (male),adductors,upper legs,body weight,Isolation,Other,1
+barbell alternate biceps curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell drag curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell lying preacher curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell preacher curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell prone incline curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell reverse curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell reverse preacher curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell seated close-grip concentration curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell standing close grip curl,biceps,upper arms,barbell,Isolation,Pull,2
+barbell seated calf raise,calves,lower legs,barbell,Isolation,Push,2
+barbell standing leg calf raise,calves,lower legs,barbell,Isolation,Push,2
+barbell standing rocking leg calf raise,calves,lower legs,barbell,Isolation,Push,2
+circles knee stretch,calves,lower legs,body weight,Isolation,Other,1
+donkey calf raise,calves,lower legs,body weight,Isolation,Push,1
+dumbbell seated one leg calf raise,calves,lower legs,dumbbell,Isolation,Push,1
+dumbbell single leg calf raise,calves,lower legs,dumbbell,Isolation,Push,1
+dumbbell standing calf raise,calves,lower legs,dumbbell,Isolation,Push,1
+lever seated calf raise,calves,lower legs,leverage machine,Isolation,Push,1
+lever standing calf raise,calves,lower legs,leverage machine,Isolation,Push,1
+jack burpee,cardiovascular system,cardio,body weight,Compound,Other,1
+mountain climber,cardiovascular system,cardio,body weight,Cardio,Other,1
+run (equipment),cardiovascular system,cardio,body weight,Cardio,Other,1
+run,cardiovascular system,cardio,body weight,Cardio,Other,1
+stationary bike walk,cardiovascular system,cardio,leverage machine,Cardio,Other,1
+burpee,cardiovascular system,cardio,body weight,Compound,Other,1
+dumbbell burpee,cardiovascular system,cardio,dumbbell,Compound,Other,2
+stationary bike run v. 3,cardiovascular system,cardio,stationary bike,Cardio,Other,1
+walk elliptical cross trainer,cardiovascular system,cardio,elliptical machine,Cardio,Other,1
+walking on stepmill,cardiovascular system,cardio,stepmill machine,Cardio,Other,1
+barbell front raise,delts,shoulders,barbell,Isolation,Push,2
+barbell one arm snatch,delts,shoulders,barbell,Compound,Other,3
+barbell rear delt raise,delts,shoulders,barbell,Isolation,Push,2
+barbell rear delt row,delts,shoulders,barbell,Compound,Pull,3
+barbell seated behind head military press,delts,shoulders,barbell,Compound,Push,3
+barbell seated bradford rocky press,delts,shoulders,barbell,Compound,Push,3
+barbell seated overhead press,delts,shoulders,barbell,Compound,Push,3
+barbell skier,delts,shoulders,barbell,Isolation,Other,2
+barbell standing bradford press,delts,shoulders,barbell,Compound,Push,3
+barbell standing front raise over head,delts,shoulders,barbell,Isolation,Push,2
+barbell reverse wrist curl v. 2,forearms,lower arms,barbell,Isolation,Pull,2
+barbell reverse wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
+barbell standing back wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
+barbell wrist curl v. 2,forearms,lower arms,barbell,Isolation,Pull,2
+barbell wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
+cable reverse wrist curl,forearms,lower arms,cable,Isolation,Pull,1
+cable standing back wrist curl,forearms,lower arms,cable,Isolation,Pull,1
+cable wrist curl,forearms,lower arms,cable,Isolation,Pull,1
+dumbbell lying pronation,forearms,lower arms,dumbbell,Isolation,Other,1
+dumbbell lying supination,forearms,lower arms,dumbbell,Isolation,Other,1
+barbell clean-grip front squat,glutes,upper legs,barbell,Compound,Push,3
+barbell deadlift,glutes,upper legs,barbell,Compound,Pull,3
+barbell front chest squat,glutes,upper legs,barbell,Compound,Push,3
+barbell front squat,glutes,upper legs,barbell,Compound,Push,3
+barbell full squat,glutes,upper legs,barbell,Compound,Push,3
+barbell hack squat,glutes,upper legs,barbell,Compound,Push,3
+barbell jefferson squat,glutes,upper legs,barbell,Compound,Push,3
+barbell jump squat,glutes,upper legs,barbell,Compound,Push,3
+barbell lunge,glutes,upper legs,barbell,Compound,Push,3
+barbell lying lifting (on hip),glutes,upper legs,barbell,Compound,Other,3
+assisted prone hamstring,hamstrings,upper legs,assisted,Isolation,Other,1
+barbell good morning,hamstrings,upper legs,barbell,Isolation,Other,2
+barbell straight leg deadlift,hamstrings,upper legs,barbell,Compound,Pull,3
+dumbbell lying femoral,hamstrings,upper legs,dumbbell,Isolation,Other,1
+inverse leg curl (bench support),hamstrings,upper legs,body weight,Compound,Pull,1
+kettlebell hang clean,hamstrings,upper legs,kettlebell,Compound,Other,3
+kick out sit,hamstrings,upper legs,body weight,Other,Other,1
+lever kneeling leg curl,hamstrings,upper legs,leverage machine,Isolation,Pull,1
+lever lying leg curl,hamstrings,upper legs,leverage machine,Isolation,Pull,1
+lever seated leg curl,hamstrings,upper legs,leverage machine,Isolation,Pull,1
+alternate lateral pulldown,lats,back,cable,Compound,Pull,2
+assisted parallel close grip pull-up,lats,back,leverage machine,Compound,Pull,2
+assisted pull-up,lats,back,leverage machine,Compound,Pull,2
+barbell pullover to press,lats,back,barbell,Compound,Push,3
+barbell decline bent arm pullover,lats,back,barbell,Isolation,Other,2
+barbell decline wide-grip pullover,lats,back,barbell,Isolation,Other,2
+barbell pullover,lats,back,barbell,Isolation,Other,2
+cable bar lateral pulldown,lats,back,cable,Compound,Pull,2
+cable cross-over lateral pulldown,lats,back,cable,Compound,Pull,2
+cable incline pushdown,lats,back,cable,Isolation,Other,1
+side push neck stretch,levator scapulae,neck,body weight,Isolation,Other,1
+neck side stretch,levator scapulae,neck,body weight,Isolation,Other,1
+assisted chest dip (kneeling),pectorals,chest,leverage machine,Compound,Push,2
+barbell bench press,pectorals,chest,barbell,Compound,Push,3
+barbell decline bench press,pectorals,chest,barbell,Compound,Push,3
+barbell decline wide-grip press,pectorals,chest,barbell,Compound,Push,3
+barbell front raise and pullover,pectorals,chest,barbell,Isolation,Push,2
+barbell guillotine bench press,pectorals,chest,barbell,Compound,Push,3
+barbell incline bench press,pectorals,chest,barbell,Compound,Push,3
+barbell wide bench press,pectorals,chest,barbell,Compound,Push,3
+cable bench press,pectorals,chest,cable,Compound,Push,2
+cable cross-over variation,pectorals,chest,cable,Isolation,Other,1
+balance board,quads,upper legs,body weight,Other,Other,1
+barbell bench front squat,quads,upper legs,barbell,Compound,Push,3
+barbell bench squat,quads,upper legs,barbell,Compound,Push,3
+barbell clean and press,quads,upper legs,barbell,Compound,Push,3
+barbell one leg squat,quads,upper legs,barbell,Compound,Push,3
+barbell overhead squat,quads,upper legs,barbell,Compound,Push,3
+barbell side split squat v. 2,quads,upper legs,barbell,Compound,Push,3
+barbell side split squat,quads,upper legs,barbell,Compound,Push,3
+barbell single leg split squat,quads,upper legs,barbell,Compound,Push,3
+barbell squat (on knees),quads,upper legs,barbell,Compound,Push,3
+barbell incline shoulder raise,serratus anterior,chest,barbell,Isolation,Push,2
+dumbbell incline shoulder raise,serratus anterior,chest,dumbbell,Isolation,Push,1
+smith incline shoulder raises,serratus anterior,chest,smith machine,Isolation,Push,1
+incline scapula push up,serratus anterior,chest,body weight,Compound,Other,1
+scapula push-up,serratus anterior,chest,body weight,Compound,Push,1
+hyperextension (on bench),spine,back,body weight,Compound,Push,1
+hyperextension,spine,back,body weight,Isolation,Push,1
+lever back extension,spine,back,leverage machine,Isolation,Push,1
+weighted hyperextension (on stability ball),spine,back,weighted,Isolation,Push,1
+band straight leg deadlift,spine,back,band,Compound,Pull,1
+back extension on exercise ball,spine,back,stability ball,Isolation,Push,1
+exercise ball back extension with arms extended,spine,back,stability ball,Isolation,Push,1
+exercise ball back extension with hands behind head,spine,back,stability ball,Isolation,Push,1
+exercise ball back extension with knees off ground,spine,back,stability ball,Isolation,Push,1
+exercise ball back extension with rotation,spine,back,stability ball,Isolation,Push,1
+barbell shrug,traps,back,barbell,Isolation,Pull,2
+cable shrug,traps,back,cable,Isolation,Pull,1
+dumbbell decline shrug v. 2,traps,back,dumbbell,Isolation,Pull,1
+dumbbell decline shrug,traps,back,dumbbell,Isolation,Pull,1
+dumbbell incline shrug,traps,back,dumbbell,Isolation,Pull,1
+dumbbell shrug,traps,back,dumbbell,Isolation,Pull,1
+kettlebell sumo high pull,traps,back,kettlebell,Compound,Other,3
+lever gripless shrug,traps,back,leverage machine,Isolation,Pull,1
+lever shrug,traps,back,leverage machine,Isolation,Pull,1
+scapular pull-up,traps,back,body weight,Compound,Pull,1
+assisted standing triceps extension (with towel),triceps,upper arms,assisted (towel),Isolation,Push,1
+assisted triceps dip (kneeling),triceps,upper arms,leverage machine,Compound,Push,2
+barbell close-grip bench press,triceps,upper arms,barbell,Compound,Push,3
+barbell decline close grip to skull press,triceps,upper arms,barbell,Compound,Push,3
+barbell incline reverse-grip press,triceps,upper arms,barbell,Compound,Push,3
+barbell jm bench press,triceps,upper arms,barbell,Compound,Push,3
+barbell lying close-grip press,triceps,upper arms,barbell,Compound,Push,3
+barbell lying close-grip triceps extension,triceps,upper arms,barbell,Isolation,Push,2
+barbell lying extension,triceps,upper arms,barbell,Isolation,Push,2
+barbell lying triceps extension skull crusher,triceps,upper arms,barbell,Isolation,Push,2
+barbell bent over row,upper back,back,barbell,Compound,Pull,3
+barbell incline row,upper back,back,barbell,Compound,Pull,3
+barbell one arm bent over row,upper back,back,barbell,Compound,Pull,3
+barbell reverse grip bent over row,upper back,back,barbell,Compound,Pull,3
+cable decline seated wide-grip row,upper back,back,cable,Compound,Pull,2
+cable floor seated wide-grip row,upper back,back,cable,Compound,Pull,2
+cable high row (kneeling),upper back,back,cable,Compound,Pull,2
+cable low seated row,upper back,back,cable,Compound,Pull,2
+cable one arm bent over row,upper back,back,cable,Compound,Pull,2
+cable one arm straight back high row (kneeling),upper back,back,cable,Compound,Pull,2

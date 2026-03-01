@@ -12,25 +12,33 @@
 
         <div class="form-group">
             <label for="splitName">Workout Mode:</label>
-            <select id="splitName">
-                </select>
+            <select id="splitName"></select>
         </div>
 
         <div class="form-group">
             <label for="volumeLevel">Training Volume:</label>
-            <select id="volumeLevel">
-                </select>
+            <select id="volumeLevel"></select>
         </div>
 
         <div class="form-group">
-            <label>Available Equipment:</label>
-            <div id="equipmentList" class="checkbox-grid">
-                </div>
+            <label for="equipmentProfile">Where are you working out?</label>
+            <select id="equipmentProfile">
+                <option value="Commercial Gym" selected>Commercial Gym (All Equipment)</option>
+                <option value="Home Gym">Home Gym (Dumbbells, Bands, Kettlebells)</option>
+                <option value="Bodyweight">Bodyweight Only (No Equipment)</option>
+            </select>
         </div>
 
         <button id="generateBtn">Generate Plan</button>
 
         <div id="results" class="results-container"></div>
+
+        <div id="actionButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button id="analyzeBtn" class="action-btn">📊 Show Weekly Analysis</button>
+            <button id="pdfBtn" class="action-btn">📥 Download as PDF</button>
+        </div>
+
+        <div id="chartContainer" style="margin-top: 20px; text-align: center;"></div>
     </div>
 
     <script src="/static/script.js"></script>

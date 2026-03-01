@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Fetch updated options (Splits, Equipment, Volumes)
+    // 1. Fetch updated options (Splits, Volumes)
     try {
         const response = await fetch("/options");
+        if (!response.ok) throw new Error("Failed to fetch options");
         const data = await response.json();
 
-        // Populate Workout Modes (Splits + Single Sessions)
+        // Populate Workout Modes (Splits)
         const splitSelect = document.getElementById("splitName");
+        splitSelect.innerHTML = ""; // Clear previous options
         data.splits.forEach(split => {
             const option = document.createElement("option");
             option.value = split;
@@ -15,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Populate Volume Levels
         const volumeSelect = document.getElementById("volumeLevel");
+        volumeSelect.innerHTML = ""; // Clear previous options
         data.volumes.forEach(vol => {
             const option = document.createElement("option");
             option.value = vol;
@@ -23,16 +26,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             volumeSelect.appendChild(option);
         });
 
-        // Populate Equipment Checkboxes
-        const equipmentList = document.getElementById("equipmentList");
-        data.equipment.forEach(eq => {
-            const div = document.createElement("div");
-            div.innerHTML = `
-                <input type="checkbox" id="eq_${eq}" value="${eq}" checked>
-                <label for="eq_${eq}">${eq}</label>
-            `;
-            equipmentList.appendChild(div);
-        });
+        // NOTE: Equipment checkboxes have been removed in favor of the Profile Dropdown
+
     } catch (error) {
         console.error("Error loading options:", error);
     }
@@ -41,17 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("generateBtn").addEventListener("click", async () => {
         const splitName = document.getElementById("splitName").value;
         const volumeLevel = document.getElementById("volumeLevel").value;
-        const checkedEquipments = Array.from(document.querySelectorAll('#equipmentList input:checked'))
-                                     .map(cb => cb.value);
 
-        if (checkedEquipments.length === 0) {
-            alert("Please select at least one equipment!");
-            return;
-        }
+        // Fetch the selected profile string instead of checking multiple boxes
+        const selectedProfile = document.getElementById("equipmentProfile").value;
 
         const requestData = {
             split_name: splitName,
-            equipment_list: checkedEquipments,
+            equipment_profile: selectedProfile,
             volume_level: volumeLevel
         };
 
@@ -65,8 +56,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             const resultsDiv = document.getElementById("results");
             resultsDiv.innerHTML = ""; // Clear previous results
 
+            // Hide action buttons and chart area initially
+            document.getElementById("actionButtons").style.display = "none";
+            document.getElementById("chartContainer").innerHTML = "";
+
             if (!response.ok) {
-                resultsDiv.innerHTML = `<p style="color: red;">No exercises found for these criteria.</p>`;
+                resultsDiv.innerHTML = `<p style="color: red;">No exercises found for these criteria. Try a different equipment profile.</p>`;
                 return;
             }
 
@@ -87,14 +82,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                     html += `<table>
                                 <tr>
                                     <th>Exercise</th>
-                                    <th>Target</th> <th>Sets/Reps</th>
+                                    <th>Target</th> 
+                                    <th>Sets/Reps</th>
                                     <th>Tool</th>
+                                    <th>Action</th>
                                 </tr>`;
-                    exercises.forEach(ex => {
-                        html += `<tr>
-                                    <td>${ex.name}</td>
-                                    <td style="color: #b3b3b3; font-size: 0.9rem;">${ex.target}</td> <td><strong>${ex.volume}</strong></td>
-                                    <td>${ex.equipment}</td>
+                    exercises.forEach((ex, index) => {
+                        // Create a unique ID for each row to allow real-time DOM updates
+                        const rowId = `row_${day.replace(/\s+/g, '')}_${index}`;
+                        html += `<tr id="${rowId}">
+                                    <td class="ex-name">${ex.name}</td>
+                                    <td class="ex-target" style="color: #b3b3b3; font-size: 0.9rem;">${ex.target}</td> 
+                                    <td><strong>${ex.volume}</strong></td>
+                                    <td class="ex-eq">${ex.equipment}</td>
+                                    <td>
+                                        <button class="swap-btn" onclick="swapExercise('${day}', ${index}, '${ex.name}', '${rowId}')">🔄</button>
+                                    </td>
                                  </tr>`;
                     });
                     html += `</table>`;
@@ -104,8 +107,105 @@ document.addEventListener("DOMContentLoaded", async () => {
                 resultsDiv.appendChild(dayCard);
             }
 
+            // 4. Show action buttons and store the plan globally for chart/PDF generation
+            document.getElementById("actionButtons").style.display = "block";
+            window.currentWeeklyPlan = weeklyPlan;
+
         } catch (error) {
             console.error("Error generating plan:", error);
         }
     });
+
+    // 5. Weekly Analysis (Chart) Button Click
+    document.getElementById("analyzeBtn").addEventListener("click", async () => {
+        try {
+            const response = await fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(window.currentWeeklyPlan)
+            });
+            const data = await response.json();
+
+            // Render the Base64 image
+            const chartDiv = document.getElementById("chartContainer");
+            chartDiv.innerHTML = `<img src="${data.chart}" alt="Volume Chart" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); margin-top: 15px;">`;
+
+            // Smooth scroll to the newly generated chart
+            chartDiv.scrollIntoView({ behavior: 'smooth' });
+        } catch (error) {
+            console.error("Error analyzing plan:", error);
+        }
+    });
+
+    // 6. Export PDF Button Click
+    document.getElementById("pdfBtn").addEventListener("click", async () => {
+        try {
+            const response = await fetch("/export-pdf", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(window.currentWeeklyPlan)
+            });
+            const data = await response.json();
+
+            // Create a hidden anchor tag to trigger the file download
+            const link = document.createElement('a');
+            link.href = data.download_url;
+            link.download = 'GainEngine_Workout_Plan.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error("Error generating PDF:", error);
+        }
+    });
 });
+
+/**
+ * Smart Swap Logic: Asks for user confirmation before updating the UI with ML suggestion.
+ */
+async function swapExercise(day, index, exerciseName, rowId) {
+    const selectedProfile = document.getElementById("equipmentProfile").value;
+
+    // Collect exercises currently on the screen to prevent duplicate recommendations
+    const dayCard = document.getElementById(rowId).closest('.day-card');
+    const currentExercises = Array.from(dayCard.querySelectorAll('.ex-name')).map(td => td.textContent);
+
+    try {
+        const response = await fetch("/swap", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                exercise_name: exerciseName,
+                equipment_profile: selectedProfile,
+                current_day_exercises: currentExercises
+            })
+        });
+
+        if (response.ok) {
+            const newEx = await response.json();
+
+            // Simplified UI confirmation: Old Exercise ➔ New Exercise
+            const confirmSwap = confirm(`${exerciseName} ➔ ${newEx.name}`);
+
+            if (confirmSwap) {
+                // Update the specific row in the DOM without reloading the page
+                const row = document.getElementById(rowId);
+                row.querySelector(".ex-name").textContent = newEx.name;
+                row.querySelector(".ex-target").textContent = newEx.target;
+                row.querySelector(".ex-eq").textContent = newEx.equipment;
+
+                // Update the button's onclick attribute for future swaps on the new exercise
+                const btn = row.querySelector(".swap-btn");
+                btn.setAttribute("onclick", `swapExercise('${day}', ${index}, '${newEx.name}', '${rowId}')`);
+
+                // Add a brief visual highlight to indicate the change
+                row.style.backgroundColor = "#3d3d3d";
+                setTimeout(() => row.style.backgroundColor = "transparent", 1000);
+            }
+        } else {
+            alert("No alternative found for this exercise with your current equipment.");
+        }
+    } catch (error) {
+        console.error("Error during smart swap:", error);
+    }
+}

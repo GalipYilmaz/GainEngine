@@ -1,20 +1,29 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Fetch options from the backend (API) when the page loads
+    // 1. Fetch updated options (Splits, Equipment, Volumes)
     try {
         const response = await fetch("/options");
         const data = await response.json();
 
-        // Add body parts to the dropdown list
-        const bodyPartSelect = document.getElementById("bodyPart");
-        data.body_parts.forEach(part => {
+        // Populate Workout Modes (Splits + Single Sessions)
+        const splitSelect = document.getElementById("splitName");
+        data.splits.forEach(split => {
             const option = document.createElement("option");
-            option.value = part;
-            // Capitalize the first letter for better UI
-            option.textContent = part.charAt(0).toUpperCase() + part.slice(1);
-            bodyPartSelect.appendChild(option);
+            option.value = split;
+            option.textContent = split;
+            splitSelect.appendChild(option);
         });
 
-        // Add equipment options as checkboxes
+        // Populate Volume Levels
+        const volumeSelect = document.getElementById("volumeLevel");
+        data.volumes.forEach(vol => {
+            const option = document.createElement("option");
+            option.value = vol;
+            option.textContent = vol;
+            if(vol === "Normal") option.selected = true;
+            volumeSelect.appendChild(option);
+        });
+
+        // Populate Equipment Checkboxes
         const equipmentList = document.getElementById("equipmentList");
         data.equipment.forEach(eq => {
             const div = document.createElement("div");
@@ -28,12 +37,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error loading options:", error);
     }
 
-    // 2. Code to execute when the "Generate Workout" button is clicked
+    // 2. Generate Plan Button Click
     document.getElementById("generateBtn").addEventListener("click", async () => {
-        const bodyPart = document.getElementById("bodyPart").value;
-        const numExercises = parseInt(document.getElementById("numExercises").value);
-
-        // Get only the checked equipment values
+        const splitName = document.getElementById("splitName").value;
+        const volumeLevel = document.getElementById("volumeLevel").value;
         const checkedEquipments = Array.from(document.querySelectorAll('#equipmentList input:checked'))
                                      .map(cb => cb.value);
 
@@ -42,56 +49,63 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Prepare the payload to send to the API
         const requestData = {
-            body_part: bodyPart,
+            split_name: splitName,
             equipment_list: checkedEquipments,
-            num_exercises: numExercises
+            volume_level: volumeLevel
         };
 
         try {
-            // Send the data to the engine via POST request
             const response = await fetch("/generate", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestData)
             });
 
             const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = ""; // Clear previous results
 
-            // Show an error message if no matching exercises are found
             if (!response.ok) {
                 resultsDiv.innerHTML = `<p style="color: red;">No exercises found for these criteria.</p>`;
                 return;
             }
 
-            const workoutPlan = await response.json();
+            const weeklyPlan = await response.json();
 
-            // Convert the received JSON data into an HTML table
-            let html = `<h3>Your Workout Plan</h3>
-                        <table border="1" style="width:100%; text-align:left; border-collapse: collapse;">
-                            <tr>
-                                <th>Exercise Name</th>
-                                <th>Equipment</th>
-                                <th>Type</th>
-                            </tr>`;
+            // 3. Render Weekly Plan as Cards
+            for (const [day, exercises] of Object.entries(weeklyPlan)) {
+                const dayCard = document.createElement("div");
+                dayCard.className = "day-card";
 
-            workoutPlan.forEach(exercise => {
-                html += `<tr>
-                            <td>${exercise.name}</td>
-                            <td>${exercise.equipment}</td>
-                            <td>${exercise.exercise_type || '-'}</td>
-                         </tr>`;
-            });
-            html += `</table>`;
+                let html = `<h3>${day}</h3>`;
 
-            // Render the table on the screen
-            resultsDiv.innerHTML = html;
+                if (typeof exercises === "string") {
+                    // It's a Rest Day message
+                    html += `<p class="rest-msg">${exercises}</p>`;
+                } else {
+                   // It's an exercise list
+                    html += `<table>
+                                <tr>
+                                    <th>Exercise</th>
+                                    <th>Target</th> <th>Sets/Reps</th>
+                                    <th>Tool</th>
+                                </tr>`;
+                    exercises.forEach(ex => {
+                        html += `<tr>
+                                    <td>${ex.name}</td>
+                                    <td style="color: #b3b3b3; font-size: 0.9rem;">${ex.target}</td> <td><strong>${ex.volume}</strong></td>
+                                    <td>${ex.equipment}</td>
+                                 </tr>`;
+                    });
+                    html += `</table>`;
+                }
+
+                dayCard.innerHTML = html;
+                resultsDiv.appendChild(dayCard);
+            }
 
         } catch (error) {
-            console.error("Error generating workout:", error);
+            console.error("Error generating plan:", error);
         }
     });
 });

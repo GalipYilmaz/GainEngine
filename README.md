@@ -52,7 +52,7 @@ Start the FastAPI server using Uvicorn:
 uvicorn src.api:app --reload
 ```
 
-**5. Access the Application
+**5. Access the Application**
 Open your web browser and navigate to: http://127.0.0.1:8000
 
 

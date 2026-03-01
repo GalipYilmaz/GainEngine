@@ -34,9 +34,9 @@ class WorkoutEngine:
         try:
             with open("data/similarity_model.pkl", "rb") as f:
                 self.model_data = pickle.load(f)
-            print("🚀 ML Model loaded successfully.")
+            print("ML Model loaded successfully.")
         except FileNotFoundError:
-            print("⚠️ Model file not found!")
+            print("Model file not found!")
 
     def generate_workout_plan(self, split_name, equipment_list, volume_level="Low"):
         """Generates a structured plan prioritizing Major vs Minor muscle group volumes."""
@@ -88,7 +88,6 @@ class WorkoutEngine:
                         final_list.append({
                             "name": row["name"],
                             "target": row["target"].capitalize() if pd.notna(row["target"]) else "N/A",
-                            # İŞTE KRİTİK ÇÖZÜM: KAS GRUBUNU KESİN OLARAK ETİKETLİYORUZ!
                             "muscle_group": muscle_group.capitalize(),
                             "equipment": row["equipment"],
                             "type": row.get("exercise_type", "Compound"),
@@ -113,18 +112,15 @@ class WorkoutEngine:
         }
         targets = mapping.get(group, [group.lower()])
 
-        # 1. Bulletproof Cleanup: Replace NaN with empty string, convert all to lowercase
         body_parts = df["bodyPart"].fillna("").astype(str).str.lower()
         target_parts = df["target"].fillna("").astype(str).str.lower()
 
-        # 2. Search using 'contains' logic instead of exact match ('isin')
         condition = pd.Series([False] * len(df), index=df.index)
         for t in targets:
             condition = condition | body_parts.str.contains(t, na=False) | target_parts.str.contains(t, na=False)
 
         filtered_df = df[condition & (df["equipment"].isin(equipment_list))]
 
-        # TERMINAL DEBUGGER: Logs the number of exercises found for each muscle group
         print(f"🛠️ [DEBUG] Number of exercises found for {group.upper()} after equipment filter: {len(filtered_df)}")
 
         return filtered_df

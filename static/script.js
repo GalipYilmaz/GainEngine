@@ -165,7 +165,7 @@ async function swapExercise(day, index, exerciseName, rowId) {
         if (response.ok) {
             const newEx = await response.json();
             
-            // Simplified UI confirmation: Old Exercise ➔ New Exercise
+            // Old Exercise ➔ New Exercise
             const confirmSwap = confirm(`${exerciseName} ➔ ${newEx.name}`);
 
             if (confirmSwap) {

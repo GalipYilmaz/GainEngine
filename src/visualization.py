@@ -5,7 +5,7 @@ import base64
 
 class WorkoutVisualizer:
     def __init__(self):
-        pass  # Artık o kelime tahmin etme sözlüğüne gerek kalmadı!
+        pass
 
     def generate_volume_chart(self, weekly_plan):
         volume_counts = {"Chest": 0, "Back": 0, "Legs": 0, "Shoulders": 0, "Triceps": 0, "Biceps": 0}
@@ -30,7 +30,6 @@ class WorkoutVisualizer:
 
                 day_total += sets
 
-                # KUSURSUZ ÇÖZÜM: Tahmin yok! Motorun yolladığı kesin etiketi al.
                 mapped_group = ex.get('muscle_group', 'Other')
                 if mapped_group in volume_counts:
                     volume_counts[mapped_group] += sets
@@ -42,7 +41,6 @@ class WorkoutVisualizer:
             daily_sets[short_day] = day_total
             day_labels.append(short_day)
 
-        # --- ÇİZİM İŞLEMLERİ ---
         fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(9, 16))
         fig.patch.set_facecolor('#1e1e1e')
 

@@ -55,7 +55,7 @@ def read_root(request: Request):
 def get_options():
     return {
         "splits": list(workout_engine.splits.keys()),
-        "volumes": ["Low", "Normal", "High"]
+        "volumes": ["Low", "High"]
     }
 
 @app.post("/generate")

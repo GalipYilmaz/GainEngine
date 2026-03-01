@@ -5,66 +5,94 @@ import base64
 
 class WorkoutVisualizer:
     def __init__(self):
-        # Map specific targets to general muscle groups for the chart
-        self.group_mapping = {
-            "chest": "Chest", "pectorals": "Chest",
-            "back": "Back", "lats": "Back", "traps": "Back", "rhomboids": "Back",
-            "shoulders": "Shoulders", "delts": "Shoulders",
-            "legs": "Legs", "quads": "Legs", "hamstrings": "Legs", "glutes": "Legs", "calves": "Legs",
-            "triceps": "Triceps",
-            "biceps": "Biceps"
-        }
+        pass  # Artık o kelime tahmin etme sözlüğüne gerek kalmadı!
 
     def generate_volume_chart(self, weekly_plan):
-        """Calculates total sets per muscle group and generates a bar chart."""
         volume_counts = {"Chest": 0, "Back": 0, "Legs": 0, "Shoulders": 0, "Triceps": 0, "Biceps": 0}
+        type_counts = {"Compound": 0, "Isolation": 0}
+        daily_sets = {}
+        day_labels = []
 
-        # Calculate total sets
         for day, exercises in weekly_plan.items():
-            if isinstance(exercises, str):  # Skip rest days
+            short_day = day.split(" - ")[0]
+
+            if isinstance(exercises, str):
+                daily_sets[short_day] = 0
+                day_labels.append(short_day)
                 continue
 
+            day_total = 0
             for ex in exercises:
-                # Extract number of sets from volume (e.g., "3x10-12" -> 3)
                 try:
                     sets = int(ex['volume'].split('x')[0])
                 except:
                     sets = 0
 
-                target = str(ex.get('target', '')).lower()
-                mapped_group = self.group_mapping.get(target, "Other")
+                day_total += sets
 
+                # KUSURSUZ ÇÖZÜM: Tahmin yok! Motorun yolladığı kesin etiketi al.
+                mapped_group = ex.get('muscle_group', 'Other')
                 if mapped_group in volume_counts:
                     volume_counts[mapped_group] += sets
 
-        # Generate Matplotlib Chart
-        plt.figure(figsize=(8, 5))
+                ex_type = ex.get('type', 'Other')
+                if ex_type == "Compound" or ex_type == "Isolation":
+                    type_counts[ex_type] += 1
+
+            daily_sets[short_day] = day_total
+            day_labels.append(short_day)
+
+        # --- ÇİZİM İŞLEMLERİ ---
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(9, 16))
+        fig.patch.set_facecolor('#1e1e1e')
+
+        neon_green = "#00e676"
+        dark_grey = "#2c2c2c"
+        text_color = "white"
+
+        # CHART 1: Bar Chart
         groups = list(volume_counts.keys())
         sets_data = list(volume_counts.values())
 
-        # Create a neon-green bar chart to match our UI
-        bars = plt.bar(groups, sets_data, color="#00e676", edgecolor="#121212")
+        bars = ax1.bar(groups, sets_data, color=neon_green, edgecolor="#121212")
+        ax1.set_title("Sets per Muscle Group", color=text_color, fontsize=16, fontweight='bold', pad=15)
+        ax1.set_ylabel("Total Sets", color=text_color, fontsize=12)
+        ax1.tick_params(colors=text_color, labelsize=11)
+        ax1.set_facecolor(dark_grey)
 
-        plt.title("Weekly Training Volume (Sets per Muscle Group)", color="white", fontsize=14)
-        plt.xlabel("Muscle Groups", color="white")
-        plt.ylabel("Total Sets", color="white")
-        plt.xticks(color="white")
-        plt.yticks(color="white")
-
-        # Make background transparent/dark to match UI
-        plt.gcf().set_facecolor('#1e1e1e')
-        plt.gca().set_facecolor('#2c2c2c')
-
-        # Add value labels on top of bars
         for bar in bars:
             yval = bar.get_height()
-            plt.text(bar.get_x() + bar.get_width() / 2, yval + 0.2, int(yval), ha='center', color='white',
-                     fontweight='bold')
+            ax1.text(bar.get_x() + bar.get_width() / 2, yval + 0.3, int(yval), ha='center', color=text_color,
+                     fontweight='bold', fontsize=12)
 
-        # Save the plot to a BytesIO object and encode as base64
+        # CHART 2: Pie Chart
+        labels = list(type_counts.keys())
+        sizes = list(type_counts.values())
+
+        if sum(sizes) > 0:
+            ax2.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90,
+                    colors=[neon_green, "#555555"], textprops={'color': text_color, 'weight': 'bold', 'fontsize': 13},
+                    wedgeprops={'edgecolor': '#1e1e1e', 'linewidth': 2})
+            ax2.set_title("Exercise Type Ratio", color=text_color, fontsize=16, fontweight='bold', pad=15)
+        else:
+            ax2.text(0.5, 0.5, "No Data", ha='center', color=text_color, fontsize=14)
+            ax2.axis('off')
+
+        # CHART 3: Line Chart
+        x_days = list(daily_sets.keys())
+        y_sets = list(daily_sets.values())
+
+        ax3.plot(x_days, y_sets, color=neon_green, marker='o', linewidth=3, markersize=10)
+        ax3.fill_between(x_days, y_sets, color=neon_green, alpha=0.1)
+        ax3.set_title("Daily Training Load", color=text_color, fontsize=16, fontweight='bold', pad=15)
+        ax3.set_ylabel("Total Sets", color=text_color, fontsize=12)
+        ax3.tick_params(colors=text_color, labelsize=11)
+        ax3.set_facecolor(dark_grey)
+        ax3.grid(color='#444444', linestyle='--', linewidth=0.5, alpha=0.7)
+
+        plt.tight_layout(pad=4.0)
         buf = io.BytesIO()
-        plt.tight_layout()
-        plt.savefig(buf, format="png", facecolor=plt.gcf().get_facecolor())
+        plt.savefig(buf, format="png", facecolor=fig.get_facecolor(), edgecolor='none')
         plt.close()
 
         buf.seek(0)

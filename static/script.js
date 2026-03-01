@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const option = document.createElement("option");
             option.value = vol;
             option.textContent = vol;
-            if(vol === "Normal") option.selected = true;
+            if(vol === "Low") option.selected = true;
             volumeSelect.appendChild(option);
         });
     } catch (error) {

@@ -46,7 +46,7 @@ Ensure your virtual environments is activated, then install the required package
 pip install -r requirements.txt
 ```
 
-**4. Run the Application
+**4. Run the Application**
 Start the FastAPI server using Uvicorn:
 ```bash
 uvicorn src.api:app --reload

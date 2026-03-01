@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #121212; /* Dark background */
+    background-color: #121212;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -16,11 +16,11 @@ body {
     padding: 20px;
 }
 
-/* Main App Container */
+/* Main Container */
 .container {
-    background-color: #1e1e1e; /* Slightly lighter dark for contrast */
+    background-color: #1e1e1e;
     width: 100%;
-    max-width: 700px;
+    max-width: 800px;
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -28,13 +28,10 @@ body {
 
 h1 {
     text-align: center;
-    color: #00e676; /* Neon green accent for fitness vibe */
+    color: #00e676;
     margin-bottom: 30px;
-    font-size: 2.2rem;
-    letter-spacing: 1px;
 }
 
-/* Form Elements Layout */
 .form-group {
     margin-bottom: 25px;
 }
@@ -42,30 +39,19 @@ h1 {
 label {
     display: block;
     margin-bottom: 10px;
-    font-weight: 600;
     color: #b3b3b3;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
 }
 
-/* Inputs and Select Dropdown */
-select, input[type="number"] {
+select {
     width: 100%;
     padding: 14px;
     background-color: #2c2c2c;
     border: 1px solid #3d3d3d;
     border-radius: 8px;
     color: #ffffff;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease;
 }
 
-select:focus, input[type="number"]:focus {
-    border-color: #00e676;
-}
-
-/* Checkbox Grid System */
+/* Checkbox Grid for Equipment */
 .checkbox-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -74,32 +60,9 @@ select:focus, input[type="number"]:focus {
     padding: 15px;
     border-radius: 8px;
     border: 1px solid #3d3d3d;
-    max-height: 220px;
-    overflow-y: auto;
 }
 
-.checkbox-grid div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.checkbox-grid input[type="checkbox"] {
-    accent-color: #00e676; /* Makes the checkbox tick neon green */
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.checkbox-grid label {
-    margin-bottom: 0;
-    color: #e0e0e0;
-    font-weight: 400;
-    cursor: pointer;
-    text-transform: capitalize;
-}
-
-/* Primary Button Styling */
+/* Primary Action Button */
 button#generateBtn {
     width: 100%;
     padding: 16px;
@@ -107,106 +70,54 @@ button#generateBtn {
     color: #121212;
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
     font-weight: 700;
-    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 10px;
 }
 
-button#generateBtn:hover {
-    background-color: #00c853; /* Slightly darker green on hover */
-    transform: translateY(-2px);
+/* Daily Workout Cards */
+.day-card {
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 5px solid #00e676;
 }
 
-button#generateBtn:active {
-    transform: translateY(0);
-}
-
-/* Results Table Styling */
-.results-container {
-    margin-top: 35px;
-}
-
-.results-container h3 {
-    color: #00e676;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #2c2c2c;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
 }
 
 th, td {
-    padding: 14px 16px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #3d3d3d;
 }
 
 th {
-    background-color: #1e1e1e;
     color: #00e676;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 0.8rem;
 }
 
-tr:last-child td {
-    border-bottom: none;
-}
-
-tr:hover td {
-    background-color: #383838;
-}
-
-/* Custom Scrollbar for the checkbox area */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #2c2c2c;
-}
-::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #00e676;
-}
-
-/* Styling for Daily Cards */
-.day-card {
-    background-color: #2c2c2c;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-left: 5px solid #00e676;
-    animation: fadeIn 0.5s ease;
-}
-
-.day-card h3 {
+/* Smart Swap Button Styles */
+.swap-btn {
+    background: none;
+    border: 1px solid #00e676;
     color: #00e676;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #3d3d3d;
-    padding-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 4px 8px;
+    transition: 0.3s ease;
+}
+
+.swap-btn:hover {
+    background-color: #00e676;
+    color: #121212;
 }
 
 .rest-msg {
     color: #b3b3b3;
     font-style: italic;
-    font-size: 1.1rem;
-    padding: 10px 0;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }

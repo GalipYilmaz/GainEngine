@@ -1,5 +1,7 @@
+import pandas as pd
 from data_manager import DataManager
 from workout_engine import WorkoutEngine
+
 
 def test_engine():
     print("Testing")
@@ -7,7 +9,7 @@ def test_engine():
     data_manager = DataManager()
     workout_engine = WorkoutEngine(data_manager)
 
-    target_body_part = "chest"
+    target_body_part = "Chest"
     available_equipment = ["barbell", "dumbbell", "body weight"]
     num_exercises = 4
 
@@ -15,13 +17,26 @@ def test_engine():
     print(f"Selected Equipment: {available_equipment}")
     print(f"Number of Exercises: {num_exercises}\n")
 
-    workout = workout_engine.generate_workout(
-        target_body_part,
-        available_equipment,
-        num_exercises
+    split_name = f"Single: {target_body_part}"
+
+    weekly_plan = workout_engine.generate_workout_plan(
+        split_name=split_name,
+        equipment_list=available_equipment,
+        volume_level="Low"
     )
 
-    if workout is None or workout.empty:
+    workout_list = weekly_plan.get(target_body_part, [])
+
+    if not workout_list or isinstance(workout_list, str):
+        workout = pd.DataFrame()
+    else:
+        workout = pd.DataFrame(workout_list)
+        if "type" in workout.columns:
+            workout = workout.rename(columns={"type": "exercise_type"})
+
+        workout = workout.head(num_exercises)
+
+    if workout.empty:
         print("No workouts available")
     else:
         print("--------Workout---------")
@@ -31,7 +46,8 @@ def test_engine():
         except KeyError:
             print(workout)
 
-        print("Test completed")
+        print("\nTest completed")
+
 
 if __name__ == "__main__":
     test_engine()

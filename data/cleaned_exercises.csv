@@ -10,7 +10,6 @@ air bike,abs,waist,body weight,Cardio,Other,1
 alternate heel touchers,abs,waist,body weight,Isolation,Other,1
 assisted hanging knee raise with throw down,abs,waist,assisted,Compound,Push,1
 assisted hanging knee raise,abs,waist,assisted,Isolation,Push,1
-assisted lying leg raise with lateral throw down,abs,waist,assisted,Compound,Push,1
 assisted lying leg raise with throw down,abs,waist,assisted,Compound,Push,1
 assisted motion russian twist,abs,waist,medicine ball,Isolation,Other,1
 barbell press sit-up,abs,waist,barbell,Compound,Push,3
@@ -32,7 +31,6 @@ barbell seated close-grip concentration curl,biceps,upper arms,barbell,Isolation
 barbell standing close grip curl,biceps,upper arms,barbell,Isolation,Pull,2
 barbell seated calf raise,calves,lower legs,barbell,Isolation,Push,2
 barbell standing leg calf raise,calves,lower legs,barbell,Isolation,Push,2
-barbell standing rocking leg calf raise,calves,lower legs,barbell,Isolation,Push,2
 circles knee stretch,calves,lower legs,body weight,Isolation,Other,1
 donkey calf raise,calves,lower legs,body weight,Isolation,Push,1
 dumbbell seated one leg calf raise,calves,lower legs,dumbbell,Isolation,Push,1
@@ -47,7 +45,6 @@ run,cardiovascular system,cardio,body weight,Cardio,Other,1
 stationary bike walk,cardiovascular system,cardio,leverage machine,Cardio,Other,1
 burpee,cardiovascular system,cardio,body weight,Compound,Other,1
 dumbbell burpee,cardiovascular system,cardio,dumbbell,Compound,Other,2
-stationary bike run v. 3,cardiovascular system,cardio,stationary bike,Cardio,Other,1
 walk elliptical cross trainer,cardiovascular system,cardio,elliptical machine,Cardio,Other,1
 walking on stepmill,cardiovascular system,cardio,stepmill machine,Cardio,Other,1
 barbell front raise,delts,shoulders,barbell,Isolation,Push,2
@@ -60,10 +57,8 @@ barbell seated overhead press,delts,shoulders,barbell,Compound,Push,3
 barbell skier,delts,shoulders,barbell,Isolation,Other,2
 barbell standing bradford press,delts,shoulders,barbell,Compound,Push,3
 barbell standing front raise over head,delts,shoulders,barbell,Isolation,Push,2
-barbell reverse wrist curl v. 2,forearms,lower arms,barbell,Isolation,Pull,2
 barbell reverse wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
 barbell standing back wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
-barbell wrist curl v. 2,forearms,lower arms,barbell,Isolation,Pull,2
 barbell wrist curl,forearms,lower arms,barbell,Isolation,Pull,2
 cable reverse wrist curl,forearms,lower arms,cable,Isolation,Pull,1
 cable standing back wrist curl,forearms,lower arms,cable,Isolation,Pull,1
@@ -72,7 +67,6 @@ dumbbell lying pronation,forearms,lower arms,dumbbell,Isolation,Other,1
 dumbbell lying supination,forearms,lower arms,dumbbell,Isolation,Other,1
 barbell clean-grip front squat,glutes,upper legs,barbell,Compound,Push,3
 barbell deadlift,glutes,upper legs,barbell,Compound,Pull,3
-barbell front chest squat,glutes,upper legs,barbell,Compound,Push,3
 barbell front squat,glutes,upper legs,barbell,Compound,Push,3
 barbell full squat,glutes,upper legs,barbell,Compound,Push,3
 barbell hack squat,glutes,upper legs,barbell,Compound,Push,3
@@ -113,12 +107,10 @@ barbell wide bench press,pectorals,chest,barbell,Compound,Push,3
 cable bench press,pectorals,chest,cable,Compound,Push,2
 cable cross-over variation,pectorals,chest,cable,Isolation,Other,1
 balance board,quads,upper legs,body weight,Other,Other,1
-barbell bench front squat,quads,upper legs,barbell,Compound,Push,3
 barbell bench squat,quads,upper legs,barbell,Compound,Push,3
 barbell clean and press,quads,upper legs,barbell,Compound,Push,3
 barbell one leg squat,quads,upper legs,barbell,Compound,Push,3
 barbell overhead squat,quads,upper legs,barbell,Compound,Push,3
-barbell side split squat v. 2,quads,upper legs,barbell,Compound,Push,3
 barbell side split squat,quads,upper legs,barbell,Compound,Push,3
 barbell single leg split squat,quads,upper legs,barbell,Compound,Push,3
 barbell squat (on knees),quads,upper legs,barbell,Compound,Push,3
@@ -139,7 +131,6 @@ exercise ball back extension with knees off ground,spine,back,stability ball,Iso
 exercise ball back extension with rotation,spine,back,stability ball,Isolation,Push,1
 barbell shrug,traps,back,barbell,Isolation,Pull,2
 cable shrug,traps,back,cable,Isolation,Pull,1
-dumbbell decline shrug v. 2,traps,back,dumbbell,Isolation,Pull,1
 dumbbell decline shrug,traps,back,dumbbell,Isolation,Pull,1
 dumbbell incline shrug,traps,back,dumbbell,Isolation,Pull,1
 dumbbell shrug,traps,back,dumbbell,Isolation,Pull,1

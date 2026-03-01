@@ -14,6 +14,9 @@ app = FastAPI(title="GainEngine API")
 data_manager = DataManager()
 workout_engine = WorkoutEngine(data_manager)
 
+# Load the pre-trained ML similarity model on startup
+workout_engine.load_model()
+
 # Mount the static directory to serve CSS and JS files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -21,11 +24,30 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-# Updated request model for Weekly Split and Volume
+# Model for weekly workout generation requests
 class WorkoutRequest(BaseModel):
     split_name: str
-    equipment_list: List[str]
+    equipment_profile: str  # Updated from List[str] to str
     volume_level: str = "Normal"
+
+
+# Model for smart exercise swap requests (ML-based)
+class SwapRequest(BaseModel):
+    exercise_name: str
+    equipment_profile: str  # Updated from List[str] to str
+    current_day_exercises: List[str] = []
+
+
+# Helper function to convert the selected profile into a list of equipment
+def get_equipment_list(profile: str) -> List[str]:
+    all_eq = data_manager.get_unique_equipment()
+    if profile == "Bodyweight":
+        return ["body weight", "assisted"]
+    elif profile == "Home Gym":
+        return ["body weight", "assisted", "dumbbell", "band", "kettlebell", "medicine ball", "stability ball"]
+    else:
+        # Commercial Gym has access to everything
+        return all_eq
 
 
 # Root endpoint to serve the frontend HTML page
@@ -34,23 +56,25 @@ def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# Endpoint to provide dropdown options (Splits and Equipment)
+# Endpoint to provide dropdown options (Splits and Volumes)
 @app.get("/options")
 def get_options():
     return {
         "splits": list(workout_engine.splits.keys()),
-        "equipment": data_manager.get_unique_equipment(),
         "volumes": ["Low", "Normal", "High"]
+        # Equipment list is no longer sent to the frontend since we use profiles
     }
 
 
-# Endpoint to generate the weekly workout plan
+# Endpoint to generate the full weekly workout plan
 @app.post("/generate")
 def generate_workout_endpoint(request: WorkoutRequest):
-    # The engine now returns a dictionary of days
+    # Convert the profile string back to a list of valid equipment
+    eq_list = get_equipment_list(request.equipment_profile)
+
     weekly_plan = workout_engine.generate_workout_plan(
         split_name=request.split_name,
-        equipment_list=request.equipment_list,
+        equipment_list=eq_list,
         volume_level=request.volume_level
     )
 
@@ -61,3 +85,21 @@ def generate_workout_endpoint(request: WorkoutRequest):
         )
 
     return weekly_plan
+
+
+# Endpoint to find a mathematically similar exercise using Cosine Similarity
+@app.post("/swap")
+def swap_exercise_endpoint(request: SwapRequest):
+    # Convert the profile string back to a list of valid equipment
+    eq_list = get_equipment_list(request.equipment_profile)
+
+    alternative = workout_engine.get_smart_alternative(
+        exercise_name=request.exercise_name,
+        equipment_list=eq_list,
+        current_exercises=request.current_day_exercises  # Prevents duplicate recommendations
+    )
+
+    if not alternative:
+        raise HTTPException(status_code=404, detail="No suitable alternative found.")
+
+    return alternative

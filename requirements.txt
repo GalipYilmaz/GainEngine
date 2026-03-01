@@ -1,5 +1,10 @@
-pandas
 fastapi
 uvicorn
+pandas
+matplotlib
 jinja2
+pydantic
+scikit-learn
+fpdf
+reportlab
 python-multipart

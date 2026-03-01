@@ -29,30 +29,39 @@ cd GainEngine
 ```
 
 **2. Create a Virtual Environment**
+
 *For Linux/macOS:*
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
+
 *For Windows:*
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
 **3. Install Dependencies**
+
 Ensure your virtual environments is activated, then install the required packages:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 **4. Run the Application**
+
 Start the FastAPI server using Uvicorn:
+
 ```bash
 uvicorn src.api:app --reload
 ```
 
 **5. Access the Application**
+
 Open your web browser and navigate to: http://127.0.0.1:8000
 
 

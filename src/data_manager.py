@@ -1,7 +1,7 @@
 import pandas as pd
 
 class DataManager:
-    def __init__(self, file_path="cleaned_exercises.csv"):
+    def __init__(self, file_path="data/cleaned_exercises.csv"):
         self.file_path = file_path
         self.df = self.load_data()
 

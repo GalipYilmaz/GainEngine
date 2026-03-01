@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #121212;
+    background-color: #121212; 
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -16,11 +16,11 @@ body {
     padding: 20px;
 }
 
-/* Main Container */
+/* Main App Container */
 .container {
-    background-color: #1e1e1e;
+    background-color: #1e1e1e; 
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -28,10 +28,13 @@ body {
 
 h1 {
     text-align: center;
-    color: #00e676;
+    color: #00e676; 
     margin-bottom: 30px;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
 }
 
+/* Form Elements Layout */
 .form-group {
     margin-bottom: 25px;
 }
@@ -39,30 +42,30 @@ h1 {
 label {
     display: block;
     margin-bottom: 10px;
+    font-weight: 600;
     color: #b3b3b3;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
-select {
+/* Inputs and Select Dropdown */
+select, input[type="number"] {
     width: 100%;
     padding: 14px;
     background-color: #2c2c2c;
     border: 1px solid #3d3d3d;
     border-radius: 8px;
     color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
-/* Checkbox Grid for Equipment */
-.checkbox-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-    background-color: #2c2c2c;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #3d3d3d;
+select:focus, input[type="number"]:focus {
+    border-color: #00e676;
 }
 
-/* Primary Action Button */
+/* Primary Button Styling */
 button#generateBtn {
     width: 100%;
     padding: 16px;
@@ -70,38 +73,108 @@ button#generateBtn {
     color: #121212;
     border: none;
     border-radius: 8px;
+    font-size: 1.1rem;
     font-weight: 700;
+    text-transform: uppercase;
     cursor: pointer;
-}
-
-/* Daily Workout Cards */
-.day-card {
-    background-color: #2c2c2c;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    border-left: 5px solid #00e676;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
+    transition: all 0.2s ease;
     margin-top: 10px;
 }
 
+button#generateBtn:hover {
+    background-color: #00c853; 
+    transform: translateY(-2px);
+}
+
+button#generateBtn:active {
+    transform: translateY(0);
+}
+
+/* Results Table Styling */
+.results-container {
+    margin-top: 35px;
+}
+
+.results-container h3 {
+    color: #00e676;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 th, td {
-    padding: 12px;
+    padding: 14px 16px;
     text-align: left;
     border-bottom: 1px solid #3d3d3d;
 }
 
 th {
+    background-color: #1e1e1e;
     color: #00e676;
-    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
-/* Smart Swap Button Styles */
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #383838;
+}
+
+/* Styling for Daily Cards */
+.day-card {
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #00e676;
+    animation: fadeIn 0.5s ease;
+}
+
+.day-card h3 {
+    color: #00e676;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #3d3d3d;
+    padding-bottom: 10px;
+}
+
+.rest-msg {
+    color: #b3b3b3;
+    font-style: italic;
+    font-size: 1.1rem;
+    padding: 10px 0;
+}
+
+/* Action Buttons (Analysis & PDF) */
+.action-btn {
+    padding: 12px 20px;
+    margin: 0 10px;
+    background-color: #2c2c2c;
+    color: #00e676;
+    border: 1px solid #00e676;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.action-btn:hover {
+    background-color: #00e676;
+    color: #121212;
+}
+
+/* Swap Button */
 .swap-btn {
     background: none;
     border: 1px solid #00e676;
@@ -111,13 +184,12 @@ th {
     padding: 4px 8px;
     transition: 0.3s ease;
 }
-
 .swap-btn:hover {
     background-color: #00e676;
     color: #121212;
 }
 
-.rest-msg {
-    color: #b3b3b3;
-    font-style: italic;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
